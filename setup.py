@@ -39,7 +39,6 @@ setup(name='WF_NTP',
           "pandas>=0.16.2",
           "Pillow>=2.9.0",
           "PIMS>=0.2.2",
-          "scikit_image<0.16",
           "scipy>=0.16.0",
           "tifffile>=2015.8.17",
           "trackpy>=0.2.4"
