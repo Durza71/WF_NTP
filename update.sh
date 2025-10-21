@@ -1,3 +1,3 @@
 #!bin/bash
 git pull
-pip3 update .
+pip3 install update .
