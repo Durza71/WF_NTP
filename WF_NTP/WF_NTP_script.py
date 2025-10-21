@@ -284,8 +284,9 @@ def process_frame(settings, Z, mean_brightness, nframes,
     labeled_removed = mh.labeled.remove_regions(labeled, remove)
     labeled_removed, n_left = mh.labeled.relabel(labeled_removed)
 
-    props = measure.regionprops(labeled_removed, coordinates='xy')
-    prop_list = [{"area": props[j].area, "centroid":props[j].centroid,
+    props = measure.regionprops(labeled_removed) # , coordinates='xy'
+    fixed_centroid = (props[j].centroid[1], props[j].centroid[0])
+    prop_list = [{"area": props[j].area, "centroid": fixed_centroid,
                   "eccentricity":props[j].eccentricity,
                   "area_eccentricity":props[j].eccentricity,
                   "minor_axis_length":props[j].minor_axis_length /
@@ -300,7 +301,7 @@ def process_frame(settings, Z, mean_brightness, nframes,
         if settings["do_full_prune"]:
             skel_labeled = prune_fully(skel_labeled)
 
-        skel_props = measure.regionprops(skel_labeled, coordinates='xy')
+        skel_props = measure.regionprops(skel_labeled)
         for j in range(len(skel_props)):
             prop_list[j]["length"] = skel_props[j].area
             prop_list[j]["eccentricity"] = skel_props[j].eccentricity
