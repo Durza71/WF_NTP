@@ -285,8 +285,7 @@ def process_frame(settings, Z, mean_brightness, nframes,
     labeled_removed, n_left = mh.labeled.relabel(labeled_removed)
 
     props = measure.regionprops(labeled_removed) # , coordinates='xy'
-    fixed_centroid = (props[j].centroid[1], props[j].centroid[0])
-    prop_list = [{"area": props[j].area, "centroid": fixed_centroid,
+    prop_list = [{"area": props[j].area, "centroid": (props[j].centroid[1], props[j].centroid[0]),
                   "eccentricity":props[j].eccentricity,
                   "area_eccentricity":props[j].eccentricity,
                   "minor_axis_length":props[j].minor_axis_length /
