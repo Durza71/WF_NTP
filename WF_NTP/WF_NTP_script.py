@@ -419,7 +419,7 @@ def extract_data(track, settings):
         # (these are removed later if count is low)
         idx = area_ecc > settings["minimum_ecc"]
         if sum(idx) > 0:
-            smooth_y = interp(x, x[idx], smooth_y[idx])
+            smooth_y = np.interp(x, x[idx], smooth_y[idx])
             particle_dataframe.at[p, "Round ratio"] = (
                 1.0 - float(sum(idx)) / float(len(idx)))
         else:
@@ -746,10 +746,10 @@ def extract_move_per_bend(bl, tt, xx, yy, px_to_mm):
     dists = []
     for i in range(len(bl)):
         if int(bl[i]) == bend_i:
-            xi = interp(i, tt, xx)
-            xj = interp(j, tt, xx)
-            yi = interp(i, tt, yy)
-            yj = interp(j, tt, yy)
+            xi = np.interp(i, tt, xx)
+            xj = np.interp(j, tt, xx)
+            yi = np.interp(i, tt, yy)
+            yj = np.interp(j, tt, yy)
 
             dist = px_to_mm * np.sqrt((xj - xi)**2 + (yj - yi)**2)
             dists.append(dist)
